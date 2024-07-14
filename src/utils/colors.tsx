@@ -1,0 +1,15 @@
+export const colors = {
+    primary: '#eeb85e',
+    secondary: '#252525',
+    success: '#4caf4f',
+    danger: '#dc3545',
+    warning: '#ffc107',
+    info: '#17a2b8',
+    light: '#ffffff',
+    dark: '#333333',
+    gray: '#efefef',
+    eid: '#ff5722',
+    gray2: '#666666',
+    gray3: '#eeeeee',
+    lightGray: '#999999',
+};
