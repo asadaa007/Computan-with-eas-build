@@ -1,14 +1,15 @@
 {
   "expo": {
     "name": "COMPUTAN",
-    "slug": "COMPUTAN",
+    "slug": "computan",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain"
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
     },
     "androidStatusBar": {
       "barStyle": "dark-content",
@@ -31,7 +32,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "8219304c-1899-4d3d-8cf7-4d24690386a1"
+        "projectId": "d87e7c31-a402-4888-91d4-174064255700"
       }
     },
     "owner": "asad.aa007"
