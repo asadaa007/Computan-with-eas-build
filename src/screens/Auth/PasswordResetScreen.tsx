@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable, Image } from 'react-native';
 import { colors } from '../../utils/colors';
+import forget from '../../assets/forget.png';
+import InputUser from '../../components/InputUser';
+import InputEmail from '../../components/InputEmail';
+import PrimaryBTN from '../../components/PrimaryBTN';
+import InputID from '../../components/InputID';
 
 const PasswordResetScreen = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [id, setID] = useState ('');
     const [resetMessage, setResetMessage] = useState('');
 
     const handleResetPassword = () => {
@@ -14,27 +20,30 @@ const PasswordResetScreen = () => {
     return (
         <View style={styles.container}>
             <Image
-                source={{ uri: 'https://timesheet.computan.com/computanLogo.png' }}
+                // source={{ uri: 'https://timesheet.computan.com/computanLogo.png' }}
+                source={forget}
                 style={styles.logo}
             />
             <Text style={styles.title}>Reset Password</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Enter Name"
-                placeholderTextColor={colors.secondary}
-                value={name}
-                onChangeText={setEmail}
+            <InputID
+            placeHolder={'Enter ID'}
+            value={id}
+            onChangeText={setID}
             />
-            <TextInput
-                style={styles.input}
-                placeholder="Enter your email"
-                placeholderTextColor={colors.secondary}
-                value={email}
-                onChangeText={setEmail}
+            <InputUser
+            placeHolder={'Enter your name'}
+            value={name}
+            onChangeText={setName}
             />
-            <Pressable style={styles.button} onPress={handleResetPassword}>
-                <Text style={styles.buttonText}>Request Reset</Text>
-            </Pressable>
+            <InputEmail
+            placeHolder={'Enter Email'}
+            value={email}
+            onChangeText={setEmail}
+            />
+            <PrimaryBTN
+            title={'Request Reset'}
+            onPress={handleResetPassword}
+            />
             {resetMessage ? <Text style={styles.resetMessage}>{resetMessage}</Text> : null}
         </View>
     );
@@ -49,35 +58,15 @@ const styles = StyleSheet.create({
         backgroundColor: colors.light,
     },
     logo: {
-        width: 150,
-        height: 150,
+        width: 330,
+        height: 250,
         marginBottom: 20,
     },
     title: {
         fontSize: 30,
         fontWeight: '500',
         marginBottom: 20,
-    },
-    input: {
-        width: '100%',
-        borderWidth: 1,
-        borderColor: colors.primary,
-        padding: 10,
-        marginBottom: 20,
-        borderRadius: 5,
-        color: colors.primary,
-    },
-    button: {
-        width: '100%',
-        backgroundColor: colors.primary,
-        paddingVertical: 15,
-        borderRadius: 5,
-        alignItems: 'center',
-    },
-    buttonText: {
-        color: colors.light,
-        fontSize: 16,
-        fontWeight: 'bold',
+        color:colors.primary,
     },
     resetMessage: {
         marginTop: 20,

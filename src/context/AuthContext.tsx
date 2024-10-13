@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 const users = {
     admin: { id: 'a', password: 'a', role: 'admin' },
     manager: { id: 'm', password: 'm', role: 'manager' },
+    hrmanager: { id: 'h', password: 'h', role: 'hrmanager' },
     employee: { id: 'e', password: 'e', role: 'employee' }
 };
 

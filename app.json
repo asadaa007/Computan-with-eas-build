@@ -13,7 +13,7 @@
     },
     "androidStatusBar": {
       "barStyle": "dark-content",
-      "backgroundColor": "#eeb85e",
+      "backgroundColor": "transparent",
       "translucent": true
     },
     "ios": {
