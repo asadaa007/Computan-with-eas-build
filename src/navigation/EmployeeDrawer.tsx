@@ -134,8 +134,8 @@ const EmployeeDrawer = () => {
                 <Drawer.Screen
                     name="TeamScreen"
                     options={{
-                        drawerLabel: 'Team',
-                        title: 'Team',
+                        drawerLabel: 'My Team',
+                        title: 'My Team',
                         drawerIcon: () => (
                             <AntDesign name="team" size={20} color={colors.dark} />
                         )

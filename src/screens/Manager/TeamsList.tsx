@@ -34,7 +34,7 @@ const TeamList = () => {
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.teamName}>Nairobi Hippos Team</Text>
-                <Text style={styles.managerName}>Team Manager: Muhammad Kassem</Text>
+                <Text style={styles.managerName}>Tech: WordPress</Text>
             </View>
             <View style={styles.filterContainer}>
                 <Ionicons name="filter" size={24} color={colors.primary} style={styles.filterIcon} />

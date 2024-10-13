@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { AuthContext } from '../context/AuthContext';
 import { colors } from '../utils/colors';
@@ -29,14 +29,14 @@ const CustomDrawerContent = (props) => {
             </View>
             <View style={styles.footer}>
                 <View style={styles.logoutContainer}>
-                    <Pressable style={styles.btnReset}>
+                    <TouchableOpacity style={styles.btnReset}>
                         <Text style={styles.text}>Password Reset</Text>
                         <Feather name="arrow-up-right" size={20} color={colors.primary} />
-                    </Pressable>
-                    <Pressable style={styles.btn} onPress={logout}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.btn} onPress={logout}>
                         <MaterialCommunityIcons name="logout" size={24} color={colors.primary} />
                         <Text style={styles.text}>Logout</Text>
-                    </Pressable>
+                    </TouchableOpacity>
                 </View>
             </View>
         </DrawerContentScrollView>

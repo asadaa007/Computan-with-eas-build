@@ -1,17 +1,9 @@
 import React, { useContext, useState } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Modal,
-  Pressable,
-  TextInput,
-  FlatList,
-} from "react-native";
-import ManagerDashboard from "../screens/Manager/ManagerDashboard";
-import TeamsList from "../screens/Manager/TeamsList";
+import { View, Text, Image, StyleSheet, Modal, Pressable } from "react-native";
+import HRManagerDashboard from "../screens/HRManager/HRManagerDashboard";
+import EmployeesList from "../screens/HRManager/EmployeesList";
+import EmployeeDetails from '../screens/HRManager/EmployeeDetails';
 import CustomDrawerContent from "../components/CustomDrawerContent";
 import { AuthContext } from "../context/AuthContext";
 import { profilePics } from "../utils/profilePics";
@@ -21,18 +13,10 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 
 const Drawer = createDrawerNavigator();
 
-const dummyMessages = [
-  { id: "1", text: "Hi there!", sender: "me" },
-  { id: "2", text: "Hello! How can I help you today?", sender: "other" },
-  { id: "3", text: "I have a question about the project.", sender: "me" },
-  { id: "4", text: "Sure, what’s your question?", sender: "other" },
-];
-
-const ManagerDrawer = () => {
+const HRManagerDrawer = () => {
   const { user } = useContext(AuthContext);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showChat, setShowChat] = useState(false);
-  const [message, setMessage] = useState("");
 
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
@@ -42,18 +26,10 @@ const ManagerDrawer = () => {
     setShowChat(!showChat);
   };
 
-  const handleSend = () => {
-    if (message.trim()) {
-      // Add your logic for sending the message here
-      console.log("Message sent:", message);
-      setMessage(""); // Clear the input field after sending
-    }
-  };
-
   return (
     <View style={styles.container}>
       <Drawer.Navigator
-        initialRouteName="ManagerDashboard"
+        initialRouteName="HRManagerDashboard"
         screenOptions={{
           drawerStyle: {
             backgroundColor: colors.primary,
@@ -110,19 +86,20 @@ const ManagerDrawer = () => {
               <AntDesign name="home" size={20} color={colors.dark} />
             ),
           }}
-          component={ManagerDashboard}
+          component={HRManagerDashboard}
         />
         <Drawer.Screen
-          name="TeamsList"
+          name="Employees"
           options={{
-            drawerLabel: "WordPress Team",
-            title: "WordPress Team",
+            drawerLabel: "Employees",
+            title: "Employees",
             drawerIcon: () => (
               <AntDesign name="team" size={20} color={colors.dark} />
             ),
           }}
-          component={TeamsList}
+          component={EmployeesList}
         />
+        <Drawer.Screen name="EmployeeDetails" options={{title:'Employees Profile'}} component={EmployeeDetails} />
       </Drawer.Navigator>
 
       <Modal
@@ -148,7 +125,6 @@ const ManagerDrawer = () => {
           </View>
         </View>
       </Modal>
-
       <Modal
         animationType="slide"
         transparent={true}
@@ -158,38 +134,13 @@ const ManagerDrawer = () => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <View style={styles.notificationHeader}>
-              <Text style={styles.modalTitle}>Computan Chat</Text>
+              <Text style={styles.modalTitle}>Chat</Text>
               <Pressable onPress={toggleChat} style={styles.closeButton}>
                 <Text style={styles.closeButtonText}>Close</Text>
               </Pressable>
             </View>
-            <FlatList
-              data={dummyMessages}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <View
-                  style={[
-                    styles.message,
-                    item.sender === "me"
-                      ? styles.myMessage
-                      : styles.otherMessage,
-                  ]}
-                >
-                  <Text style={styles.messageText}>{item.text}</Text>
-                </View>
-              )}
-              style={styles.messageList}
-            />
-            <View style={styles.inputContainer}>
-              <TextInput
-                value={message}
-                onChangeText={setMessage}
-                placeholder="Type a message..."
-                style={styles.textInput}
-              />
-              <Pressable onPress={handleSend} style={styles.sendButton}>
-                <Ionicons name="send" size={24} color={colors.light} />
-              </Pressable>
+            <View style={styles.notficationArea}>
+              <Text>No new chats</Text>
             </View>
           </View>
         </View>
@@ -208,7 +159,7 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     padding: 20,
@@ -218,10 +169,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "100%",
     height: "100%",
-    flexDirection: "column",
     overflow: "hidden",
   },
   headerIcons: {
+    display: "flex",
     flexDirection: "row",
     gap: 10,
     marginRight: 20,
@@ -231,53 +182,20 @@ const styles = StyleSheet.create({
   },
   notificationHeader: {
     padding: 20,
+    display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: colors.primary,
   },
+  notficationArea: {
+    flex: 1,
+    padding: 20,
+  },
   modalTitle: {
     fontSize: 20,
     fontWeight: "bold",
     color: colors.light,
-  },
-  messageList: {
-    flex: 1,
-    padding: 15,
-  },
-  message: {
-    padding: 10,
-    borderRadius: 10,
-    marginVertical: 5,
-    maxWidth: "70%",
-    alignSelf: "flex-start",
-  },
-  myMessage: {
-    backgroundColor: colors.primary,
-    alignSelf: "flex-end",
-  },
-  otherMessage: {
-    backgroundColor: colors.secondary,
-    alignSelf: "flex-start",
-  },
-  messageText: {
-    color: colors.light,
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 10,
-    backgroundColor: colors.primary,
-  },
-  textInput: {
-    flex: 1,
-    padding: 10,
-    borderRadius: 20,
-    backgroundColor: colors.light,
-    marginRight: 10,
-  },
-  sendButton: {
-    padding: 10,
   },
   closeButton: {
     paddingVertical: 10,
@@ -292,4 +210,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ManagerDrawer;
+export default HRManagerDrawer;

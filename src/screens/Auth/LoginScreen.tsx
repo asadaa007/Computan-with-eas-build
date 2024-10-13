@@ -2,7 +2,12 @@ import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, Pressable } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
 import { colors } from '../../utils/colors';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import InputID from '../../components/InputID';
+import InputPass from '../../components/InputPass';
+import PrimaryBTN from '../../components/PrimaryBTN';
+import SecondaryBTN from '../../components/SecondaryBTN';
+import loginArt from '../../assets/login.png';
 
 const LoginScreen = ({ navigation }) => {
     const { login } = useContext(AuthContext);
@@ -26,38 +31,30 @@ const LoginScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Image
-                source={{ uri: 'https://timesheet.computan.com/computanLogo.png' }}
+                // source={{ uri: 'https://timesheet.computan.com/computanLogo.png' }}
+                source={loginArt}
                 style={styles.logo}
             />
             <Text style={styles.title}>Login</Text>
             {error ? <Text style={styles.error}>{error}</Text> : null}
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter ID"
-                    placeholderTextColor={colors.secondary}
-                    value={id}
-                    onChangeText={setId}
-                />
-                <MaterialCommunityIcons name="account" size={24} color={colors.primary} style={styles.icon} />
-            </View>
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter Password"
-                    placeholderTextColor={colors.secondary}
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry
-                />
-                <MaterialCommunityIcons name="lock" size={24} color={colors.primary} style={styles.icon} />
-            </View>
-            <Pressable style={styles.button} onPress={handleLogin}>
-                <Text style={styles.buttonText}>Get in</Text>
-            </Pressable>
-            <Pressable onPress={handlePasswordReset}>
-                <Text style={styles.passwordReset}>Forgot password?</Text>
-            </Pressable>
+            <InputID
+            placeHolder={'Enter ID'}
+            value={id}
+            onChangeText={setId}
+            />
+            <InputPass
+            placeHolder={'Enter Password'}
+            value={password}
+            onChangeText={setPassword}
+            />
+            <PrimaryBTN
+                onPress={handleLogin}
+                title={'Get In'}
+            />
+            <SecondaryBTN
+            onPress={handlePasswordReset}
+            title={'Forget Password?'}
+            />
         </View>
     );
 };
@@ -71,55 +68,20 @@ const styles = StyleSheet.create({
         backgroundColor: colors.light,
     },
     logo: {
-        width: 150,
-        height: 150,
+        width: 350,
+        height: 250,
         marginBottom: 20,
     },
     title: {
         fontSize: 30,
         fontWeight: '500',
         marginBottom: 20,
+        color:colors.primary,
     },
-    inputContainer: {
-        width: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: colors.primary,
-        marginBottom: 20,
-        borderRadius: 5,
-        paddingHorizontal: 10,
-    },
-    input: {
-        flex: 1,
-        padding: 10,
-        color: colors.primary,
-    },
-    icon: {
-        marginLeft: 10,
-    },
-    button: {
-        width: '100%',
-        backgroundColor: colors.primary,
-        paddingVertical: 15,
-        borderRadius: 5,
-        alignItems: 'center',
-    },
-    buttonText: {
-        color: colors.light,
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
+   
     error: {
-        color: 'red',
+        color: colors.danger,
         marginBottom: 20,
-    },
-    passwordReset: {
-        color: colors.primary,
-        fontSize: 16,
-        textDecorationLine: 'underline',
-        marginTop: 20,
-        textAlign:'left'
     },
 });
 
